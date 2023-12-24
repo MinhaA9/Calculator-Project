@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+  </head>
+  <body>
+    <main>
+      <h1>Calculator</h1>
+      <div class="container">
+        <p class="expression answer-holder"></p>
+      </div>
+      <section class="section1">
+        <button class="js-bttn1"  onclick="digits(1);">1</button>
+        <button class="js-bttn1" onclick="digits(2);">2</button>
+        <button onclick="digits(3);">3</button>
+        <button class="operator" onclick="operate('+');">+</button>
+      </section>
+      <section class="section2">
+        <button onclick="digits(4);">4</button>
+        <button onclick="digits(5);">5</button>
+        <button onclick="digits(6);">6</button>
+        <button class="operator" onclick="operate('-');">-</button>
+      </section>
+      <section class="section3">
+        <button onclick="digits(7);">7</button>
+        <button onclick="digits(8);">8</button>
+        <button onclick="digits(9);">9</button>
+        <button class="operator" onclick="operate('*');">*</button>
+      </section>
+      <section class="section4">
+        <button onclick="digits(0);">0</button>
+        <button onclick="digits('.');">.</button>
+        <button class="equal-button" onclick="equal();">=</button>
+        <button class="operator" onclick="operate('/');">/</button>
+      </section>
+      <section class="section5">
+        <button class="clear-button" onclick="reset();">Clear</button>
+      </section>
+    </main>
+    <script src="calculator.js"></script>
+  </body>
+    
+
+</html>

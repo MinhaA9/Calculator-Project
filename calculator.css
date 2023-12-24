@@ -1,0 +1,84 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  background-color: rgb(12, 42, 83);
+}
+main{
+  height:680px;
+  width:430px;
+  border: 5px solid black;
+  margin: 50px;
+  border-radius: 100px;
+  background-color: rgb(17, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 10px 10px rgb(52, 51, 51); 
+
+}
+h1{
+  /* border: 2px solid rgb(21, 32, 182); */
+  text-align: center;
+  /* background-color: rgb(251, 148, 247); */
+  border-radius: 100px;
+  padding: 10px;
+  /* margin-top: 50px; */
+  color: white;
+}
+.container{
+  /* border: 1px solid white; */
+  border: none;
+  height: 100px;
+  width: 420px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  background-color: rgb(47, 44, 44);
+}
+.answer-holder{
+  height: 70px;
+  width: fit-content;
+  font-size: 50px;
+  color: beige;
+  margin-left: 10px;
+}
+section{
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(65, 187, 227);
+  border-radius: 20%;
+  margin: 5px;
+}
+.section5{
+  /* margin-bottom: 52px; */
+}
+button{
+  height: 56px;
+  width: 58px;
+  padding-top: 5px 10px 5px;
+  margin: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 30px;
+  border:none;
+  background-color: rgb(245, 187, 81);
+  box-shadow: 10px 10px black; 
+  /* make shadow disapper when pressed */
+}
+.operator{
+  background-color: rgb(163, 99, 147);
+  color:white;
+}
+.clear-button{
+  width:100px;
+  background-color: rgb(184, 94, 94);
+  color: white;
+}
+.equal-button{
+  background-color: rgb(52, 163, 52);
+  color: white;
+}
+.is-pressed{
+  box-shadow: none;
+}
