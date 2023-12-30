@@ -70,6 +70,12 @@ button{
   background-color: rgb(163, 99, 147);
   color:white;
 }
+.back-button{
+  width:100px;
+  background-color: rgb(242, 238, 3);
+  color: rgb(67, 51, 51);
+  font-size: 17px;
+}
 .clear-button{
   width:100px;
   background-color: rgb(184, 94, 94);
