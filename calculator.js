@@ -146,11 +146,34 @@ function operate(operation){
     expression+=operation;
     document.querySelector('.expression').innerHTML=expression;
   }
-
 }
+function extraDecimals(){
+  let decimalExist = false;
+  let start_index =-1;
+  for(i=expression.length-1;i>-1;i--){
+    let exp = expression[i];
+    if(exp==='+' || exp==='-' || exp==='*' || exp==='/'){
+      start_index=i+1;
+    }
+  }
+  for(i=start_index;i<expression.length;i++){
+    if(expression[i]==='.'){
+      decimalExist = true;
+      break;
+    }
+  }
+  return decimalExist;
+}
+
 function digits(digit){
-  expression+=digit;
-  document.querySelector('.expression').innerHTML=expression;
+  let decimalExist = false;
+  if(digit==='.'){
+    decimalExist=extraDecimals();
+  }
+  if(decimalExist === false){
+    expression+=digit;
+    document.querySelector('.expression').innerHTML=expression;
+  }
 }
 function reset(){
   expression='';
