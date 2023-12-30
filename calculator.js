@@ -15,6 +15,13 @@ function removeParenthesis(index){
   lst=lst.concat(temp1);
   lst=lst.concat(temp2);  
 }
+function addMultiplicationSign(index){
+  let temp1 = lst.slice(index+1);
+  lst = lst.slice(0,index+1);
+  lst =lst.concat('*');
+  lst = lst.concat(temp1);
+  console.log(lst);
+}
 function pemdas(){
   listIT();
   start_index=0;
@@ -25,6 +32,9 @@ function pemdas(){
         start_index = i;
       }
       else if(lst[i]===')'){
+        if(lst[i+1]==='('){
+          addMultiplicationSign(i);
+        }
         end_index=i;
         let index=calculate(start_index,end_index);
         // console.log(lst[index],lst);

@@ -11,5 +11,8 @@ console.log(expression,' = ', pf,(pf==='-981')? 'passed':'failed','-981');
 
 expression = '(3.55+4*8)*(6-8*(9.6+5)-3)';
 pf = testing(expression);
-console.log(pf);
 console.log(expression,' = ', pf, (pf==='-4045.59')? 'passed':'failed', '-4045.59');
+
+expression = '(3+2)(5+2)';
+pf = testing(expression);
+console.log(expression,' = ', pf, (pf==='35')? 'passed':'failed', '35');
