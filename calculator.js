@@ -1,6 +1,9 @@
 let operator='';
 let expression='';
 let lst = [];
+let expressionClicked = false;
+let openParentheisCounter = 0;
+let closeParenthesisCounter = 0;
 function result(i, temp){
   lst[i-1]=String(temp);
   let temp2=lst.slice(i+2);
@@ -20,7 +23,6 @@ function addMultiplicationSign(index){
   lst = lst.slice(0,index+1);
   lst =lst.concat('*');
   lst = lst.concat(temp1);
-  console.log(lst);
 }
 function pemdas(){
   listIT();
@@ -30,17 +32,28 @@ function pemdas(){
     if(lst[i]==='(' || lst[i]===')'){
       if(lst[i]==='('){
         start_index = i;
+        if(isNaN(lst[i-1])===false){ // meaning it is a number
+          addMultiplicationSign(i-1);
+          // console.log(lst);
+
+        }
       }
       else if(lst[i]===')'){
-        if(lst[i+1]==='('){
+        // console.log(lst[i+1]);
+        if(lst[i+1]==='(' || isNaN(lst[i+1])===false){
           addMultiplicationSign(i);
+          // console.log("i: ", i,lst);
+          // break;
         }
         end_index=i;
-        let index=calculate(start_index,end_index);
-        // console.log(lst[index],lst);
-        // break;
-        if(lst[index-1]==='(' && lst[index+1]===')'){
-          removeParenthesis(index);
+        if(start_index+2===end_index){
+          removeParenthesis(start_index+1);
+        }
+        else{
+          let index=calculate(start_index,end_index);
+          if(lst[index-1]==='(' && lst[index+1]===')'){
+            removeParenthesis(index);
+          }
         }
         i=0;
         start_index=0;
@@ -58,7 +71,7 @@ function listIT(){
     }
 
     /*
-      numbers are added to the str variable 
+      numbers are added to the str variable every loop unitil there's a operator
     */
     else if(expression[i]!== '+' && expression[i]!=='-' && expression[i]!=='*' && expression[i]!=='/'){
       str+=expression[i];
@@ -66,7 +79,7 @@ function listIT(){
         str+=expression[i+1];
         i++;
       }
-      if(i===expression.length-1 || expression[i+1]===')'){
+      if(i===expression.length-1 || expression[i+1]===')' || expression[i+1]==='('){
         lst.push(str);
         str='';
       }
@@ -82,7 +95,7 @@ function listIT(){
       str='';
     }
   }
-  // console.log(lst);
+  console.log(lst);
 }
 function calculate(start_index=0, end_index=lst.length){  
   for(i=start_index;i<end_index;i++){
@@ -127,9 +140,20 @@ function calculate(start_index=0, end_index=lst.length){
   return lst[0];
 }
 function equal(){
-  document.querySelector('.expression').innerHTML= pemdas(); 
-  expression=lst[0]; 
-  lst=[];
+  let whichOperator =expression[expression.length-1];
+  if(whichOperator!=='+' && whichOperator!=='-' && whichOperator!=='*' && whichOperator!=='/' && whichOperator!=='('){
+    if(openParentheisCounter===closeParenthesisCounter){
+      document.querySelector('.expression').innerHTML= pemdas(); 
+      expression=lst[0];
+    } 
+    else{
+      document.querySelector('.expression').innerHTML='Format Error'; 
+      expression='';
+    }
+    lst=[];
+    openParentheisCounter=0;
+    closeParenthesisCounter=0;
+  }
 
 }
 function backspace(){
@@ -137,14 +161,33 @@ function backspace(){
   document.querySelector('.expression').innerHTML=expression;
 }
 function parentheses(bracket){
-  expression+=bracket;
-  document.querySelector('.expression').innerHTML=expression;
+  if(bracket==='('){
+    //fix this
+    let lengthOne = expression.length === 1 && expression[0]==='.';
+    if(lengthOne===false){
+      openParentheisCounter++;
+      expression+=bracket;
+      document.querySelector('.expression').innerHTML=expression;
+    }
+  }
+  else if(bracket===')'){    
+    if(closeParenthesisCounter+1<=openParentheisCounter){
+      if(expression[expression.length-1]!=='.'){
+        closeParenthesisCounter++;
+        expression+=bracket;
+        document.querySelector('.expression').innerHTML=expression;
+      }
+    }
+
+  }
 }
 function operate(operation){
-  whichOperator=expression.charAt(expression.length-1);
-  if(whichOperator!=='+' && whichOperator!=='-' && whichOperator!=='*' && whichOperator!=='/'){
-    expression+=operation;
-    document.querySelector('.expression').innerHTML=expression;
+  whichOperator=expression[expression.length-1];
+  if(expression.length>0){
+    if(whichOperator!=='+' && whichOperator!=='-' && whichOperator!=='*' && whichOperator!=='/' && whichOperator!=='('){
+      expression+=operation;
+      document.querySelector('.expression').innerHTML=expression;
+    }
   }
 }
 function extraDecimals(){
@@ -176,6 +219,8 @@ function digits(digit){
   }
 }
 function reset(){
+  openParentheisCounter=0;
+  closeParenthesisCounter=0;
   expression='';
   lst=[];
   document.querySelector('.expression').innerHTML=expression;
@@ -187,4 +232,16 @@ function testing(expressionTest){
   return lst[0];
 }
 
+function expressionClick(){
+  let expCld = document.querySelector('.expression');
+
+  if(expressionClicked===false){
+    expCld.classList.add('answer-holder-is-clicked');
+    expressionClicked = true;
+  }
+  else if( expressionClicked===true){
+    expCld.classList.remove('answer-holder-is-clicked');
+    expressionClicked = false;
+  }
+}
 module.exports = testing;
